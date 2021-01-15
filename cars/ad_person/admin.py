@@ -1,19 +1,40 @@
 from django.contrib import admin
-from .models import  Person_information, Person_auto, Dock, Comment
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+from .models import Person_information, Person_auto, Dock, Comment
 # Register your models here.
+
 
 @admin.register(Person_information)
 class PersonInfo(admin.ModelAdmin):
-    list_display=('person', 'phone')
+    list_display = ('person', 'phone')
+    search_fields = ['phone', 'adress']
 
-@admin.register(Person_auto)
+
 class PersonAuto(admin.ModelAdmin):
-    list_display=('name', 'owner', 'price','kilometrage')
+    list_display = ('name', 'owner', 'price', 'kilometrage')
+
 
 @admin.register(Dock)
 class Docks(admin.ModelAdmin):
-    list_display=('car',  'state_number')
+    list_display = ('car',  'state_number')
+
 
 @admin.register(Comment)
 class Comment(admin.ModelAdmin):
-    list_display=('user', 'date', 'comment')
+    list_display = ('user', 'date', 'comment')
+
+
+class expPerson_auto(resources.ModelResource):
+
+    class Meta:
+        model = Person_auto
+
+
+class exportAd(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('name', 'owner', 'price', 'kilometrage')
+    search_fields = ['name', 'price']
+    resource_class = expPerson_auto
+
+
+admin.site.register(Person_auto, exportAd)
