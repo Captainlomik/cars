@@ -68,7 +68,7 @@ class Dock(models.Model):
     state_number = models.CharField(
         help_text='гос номер', null=True, max_length=20)
     insurance = models.BooleanField('Cтраховка', default=False)
-    car = models.ForeignKey(Person_auto, on_delete=models.CASCADE, null=True)
+    car = models.OneToOneField(Person_auto, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.PTS
@@ -82,3 +82,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
+

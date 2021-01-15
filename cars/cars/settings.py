@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'ad_service.apps.AdServiceConfig',
     'ad_person.apps.AdPersonConfig',
+    'rest_framework',
 
 ]
 

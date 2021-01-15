@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -15,3 +16,9 @@ class News(models.Model):
     def make_published(modeleAdmin, request, queryset):
         queryset.update(publish=True)
     make_published.short_description="Опубликовать"
+
+class CommentNews(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=2000, null=True)
+    date = models.DateField(auto_now=True)
+    news=models.ForeignKey(News, on_delete=models.CASCADE)
