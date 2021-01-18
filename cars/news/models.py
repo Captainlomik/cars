@@ -17,6 +17,10 @@ class News(models.Model):
         queryset.update(publish=True)
     make_published.short_description="Опубликовать"
 
+    def make_Unpublished(modeleAdmin, request, queryset):
+        queryset.update(publish=False)
+    make_Unpublished.short_description="Черновик"
+
 class CommentNews(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField(max_length=2000, null=True)
