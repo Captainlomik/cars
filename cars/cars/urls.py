@@ -18,11 +18,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('news.urls'))
+    path('', include('news.urls')),
+    path('', include('ad_person.urls'))
 ]
-
-from django.urls import include
-from django.urls import path
 
 
 from django.views.generic import RedirectView
